@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IRON CLUB | باشگاه حرفه‌ای و فروشگاه تخصصی</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css');
+
+        :root {
+            --bg-black: #050505;
+            --surface-black: #111111;
+            --border-color: #262626;
+            --text-white: #ffffff;
+            --text-gray: #a3a3a3;
+            --gold: #d4af37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Vazirmatn', sans-serif;
+            border-radius: 0 !important;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--text-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* هدر */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(5, 5, 5, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: var(--text-white);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-gray);
+        }
+
+        /* بخش هیرو */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.9)), 
+                        url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop') center/cover;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .btn-main {
+            background: var(--text-white);
+            color: var(--bg-black);
+            padding: 15px 35px;
+            font-weight: 900;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .btn-main:hover {
+            background: var(--text-gray);
+        }
+
+        /* عنوان بخش‌ها */
+        .section-container {
+            padding: 100px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            border-left: 5px solid var(--text-white);
+            padding-right: 15px;
+        }
+
+        /* اسلایدرها (بخش محصولات و لباس‌ها) */
+        .slider-wrapper {
+            position: relative;
+            overflow: hidden;
+            padding: 20px 0;
+        }
+
+        .slider-track {
+            display: flex;
+            gap: 30px;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
+        }
+
+        .product-card {
+            min-width: 320px;
+            background: var(--surface-black);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: border-color 0.3s;
+        }
+
+        .product-card:hover {
+            border-color: var(--text-white);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            background: #222;
+        }
+
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .product-rating {
+            color: #f1c40f;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            font-size: 1.3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        .slider-controls {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .slider-btn {
+            background: var(--surface-black);
+            color: var(--text-white);
+            border: 1px solid var(--border-color);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: var(--text-white);
+            color: var(--bg-black);
+        }
+
+        /* بخش ۳ ستون تبلیغاتی با هاور توضیحات */
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .promo-box {
+            background: var(--surface-black);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            min-height: 350px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        .promo-content h3 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .promo-desc {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(17, 17, 17, 0.95);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .promo-box:hover .promo-desc {
+            opacity: 1;
+        }
+
+        /* بخش قبل و بعد مشتریان */
+        .transformation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .transformation-card {
+            background: var(--surface-black);
+            border: 1px solid var(--border-color);
+            padding: 15px;
+            text-align: center;
+        }
+
+        .transformation-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .transformation-card p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-top: 10px;
+        }
+
+        /* باکس مربی حرفه‌ای */
+        .coach-section {
+            background: var(--surface-black);
+            border: 1px solid var(--border-color);
+            padding: 50px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+            margin: 50px 0;
+        }
+
+        .coach-img {
+            width: 300px;
+            height: 350px;
+            object-fit: cover;
+            flex-shrink: 0;
+        }
+
+        .coach-info h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 15px;
+        }
+
+        .coach-info p {
+            color: var(--text-gray);
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .read-more-link {
+            color: var(--text-white);
+            font-weight: 900;
+            text-decoration: none;
+            border-bottom: 2px solid var(--text-white);
+            padding-bottom: 3px;
+        }
+
+        /* بخش گارانتی */
+        .guarantee-section {
+            background: #0d0d0d;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 60px 5%;
+            text-align: center;
+        }
+
+        .guarantee-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .guarantee-item h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .guarantee-item p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        /* فوتر طلایی نهایی */
+        footer {
+            background-color: var(--gold);
+            color: #000;
+            padding: 60px 5%;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 1.4rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #000;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: opacity 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            opacity: 0.6;
+        }
+
+        /* ریسپانسیو */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .coach-section { flex-direction: column; padding: 25px; }
+            .coach-img { width: 100%; height: 280px; }
+            header { padding: 15px 20px; }
+            .nav-links { display: none; }
+            footer { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo" style="color:var(--text-white); text-decoration:none;">IRON CLUB</a>
+        <nav class="nav-links">
+            <a href="#supplements">مکمل‌ها و داروها</a>
+            <a href="#apparel">لباس‌ها و برندها</a>
+            <a href="#coach">مربی برتر</a>
+            <a href="#transformations">نتایج شاگردان</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h1>استاندارد مطلق تناسب اندام</h1>
+        <p>بهترین مکمل‌های ارجینال، لباس‌های انحصاری و سیستم‌های مربیگری حرفه‌ای.</p>
+        <a href="#supplements" class="btn-main">خرید محصولات</a>
+    </section>
+
+    <section id="supplements" class="section-container">
+        <h2 class="section-title">مکمل‌ها و داروهای تخصصی</h2>
+        <div class="slider-wrapper">
+            <div class="slider-track" id="supplementTrack">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1584017911766-d451b3d0e843?q=80&w=600&auto=format&fit=crop" alt="وی پروتئین" class="product-img">
+                    <div>
+                        <div class="product-title">وی پروتئین ایزوله پرمیوم</div>
+                        <div class="product-rating">★★★★★ (4.9)</div>
+                        <div class="product-price">۳,۸۰۰,۰۰۰ تومان</div>
+                    </div>
+                    <a href="#" class="btn-main" style="text-align:center; padding:10px; font-size:0.9rem;">افزودن به سبد</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1579722821273-0f6acd7d44c9?q=80&w=600&auto=format&fit=crop" alt="کراتین" class="product-img">
+                    <div>
+                        <div class="product-title">کراتین مونوهیدرات خالص</div>
+                        <div class="product-rating">★★★★★ (5.0)</div>
+                        <div class="product-price">۱,۴۵۰,۰۰۰ تومان</div>
+                    </div>
+                    <a href="#" class="btn-main" style="text-align:center; padding:10px; font-size:0.9rem;">افزودن به سبد</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1550572017-edd951b55104?q=80&w=600&auto=format&fit=crop" alt="آمینو" class="product-img">
+                    <div>
+                        <div class="product-title">آمینو اسید پیشرفته BCAA</div>
+                        <div class="product-rating">★★★★☆ (4.7)</div>
+                        <div class="product-price">۱,۹۰۰,۰۰۰ تومان</div>
+                    </div>
+                    <a href="#" class="btn-main" style="text-align:center; padding:10px; font-size:0.9rem;">افزودن به سبد</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?q=80&w=600&auto=format&fit=crop" alt="گلوتامین" class="product-img">
+                    <div>
+                        <div class="product-title">گلوتامین خالص میکرونایزد</div>
+                        <div class="product-rating">★★★★★ (4.8)</div>
+                        <div class="product-price">۱,۶۵۰,۰۰۰ تومان</div>
+                    </div>
+                    <a href="#" class="btn-main" style="text-align:center; padding:10px; font-size:0.9rem;">افزودن به سبد</a>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="slideTrack('supplementTrack', 1)">قبلی ←</button>
+                <button class="slider-btn" onclick="slideTrack('supplementTrack', -1)">→ بعدی</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="apparel" class="section-container">
+        <h2 class="section-title">لباس‌ها و برندهای Iron Club</h2>
+        <div class="slider-wrapper">
+            <div class="slider-track" id="apparelTrack">
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=600&auto=format&fit=crop" alt="تیشرت" class="product-img">
+                    <div>
+                        <div class="product-title">تیشرت تمرینی مشکی Iron Club</div>
+                        <div class="product-rating">★★★★★ (4.9)</div>
+                        <div class="product-price">۸۵۰,۰۰۰ تومان</div>
+                    </div>
+                    <a href="#" class="btn-main" style="text-align:center; padding:10px; font-size:0.9rem;">خرید محصول</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?q=80&w=600&auto=format&fit=crop" alt="هودی" class="product-img">
+                    <div>
+                        <div class="product-title">هودی لش اورسایز Iron Club</div>
+                        <div class="product-rating">★★★★★ (5.0)</div>
+                        <div class="product-price">۱,۷,۵۰,۰۰۰ تومان</div>
+                    </div>
+                    <a href="#" class="btn-main" style="text-align:center; padding:10px; font-size:0.9rem;">خرید محصول</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=600&auto=format&fit=crop" alt="شلوارک" class="product-img">
+                    <div>
+                        <div class="product-title">شلوارک ورزشی مدرن اسپرت</div>
+                        <div class="product-rating">★★★★☆ (4.6)</div>
+                        <div class="product-price">۷۰۰,۰۰۰ تومان</div>
+                    </div>
+                    <a href="#" class="btn-main" style="text-align:center; padding:10px; font-size:0.9rem;">خرید محصول</a>
+                </div>
+                <div class="product-card">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?q=80&w=600&auto=format&fit=crop" alt="کلاه" class="product-img">
+                    <div>
+                        <div class="product-title">کلاه کپ تخصصی بدنسازی</div>
+                        <div class="product-rating">★★★★★ (4.8)</div>
+                        <div class="product-price">۴۵۰,۰۰۰ تومان</div>
+                    </div>
+                    <a href="#" class="btn-main" style="text-align:center; padding:10px; font-size:0.9rem;">خرید محصول</a>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn" onclick="slideTrack('apparelTrack', 1)">قبلی ←</button>
+                <button class="slider-btn" onclick="slideTrack('apparelTrack', -1)">→ بعدی</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container">
+        <h2 class="section-title">برترین‌های ماه از نگاه کارشناسان</h2>
+        <div class="promo-grid">
+            <div class="promo-box">
+                <div class="promo-content">
+                    <h3>وی ایزوله تخصصی</h3>
+                </div>
+                <div class="promo-desc">
+                    <h3>وی ایزوله تخصصی</h3>
+                    <p>فرمولاسیون پیشرفته با بالاترین درجه خلوص و جذب فوق‌العاده سریع. مناسب جهت ریکاوری حداکثری عضلات پس از سنگین‌ترین جلسات تمرینی بدون ذره‌ای چربی اضافه.</p>
+                </div>
+            </div>
+            <div class="promo-box">
+                <div class="promo-content">
+                    <h3>کراتین مونوهیدرات</h3>
+                </div>
+                <div class="promo-desc">
+                    <h3>کراتین مونوهیدرات</h3>
+                    <p>افزایش چشمگیر قدرت انفجاری و حجم سلولی عضلات. دارای تاییدیه آزمایشگاهی معتبر جهانی برای رکوردشکنی در تمرینات قدرتی.</p>
+                </div>
+            </div>
+            <div class="promo-box">
+                <div class="promo-content">
+                    <h3>پکیج چربی‌سوز حرفه‌ای</h3>
+                </div>
+                <div class="promo-desc">
+                    <h3>پکیج چربی‌سوز حرفه‌ای</h3>
+                    <p>ترکیب قدرتمند ترموژنیک برای افزایش سوخت‌وساز بدن، پاکسازی بافت‌های چربی و حفظ کامل حجم عضلانی خشک در دوران کات.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="coach" class="section-container">
+        <h2 class="section-title">مربی ارشد مجموعه</h2>
+        <div class="coach-section">
+            <img src="https://images.unsplash.com/photo-1568602471122-7832951cc4c5?q=80&w=600&auto=format&fit=crop" alt="مربی ورزشکار" class="coach-img">
+            <div class="coach-info">
+                <h3>سهراب باقری (مستر فیتنس)</h3>
+                <p>بیش از ۱۵ سال سابقه قهرمانی در مسابقات بین‌المللی و مربیگری بیش از ۵۰۰+ تحول فیزیکی موفق. متخصص اصلاح حرکات، طراحی سیستم‌های پپتیدی و برنامه‌نویسی تخصصی بر اساس ژنتیک بدن.</p>
+                <a href="#full-story" class="read-more-link">مطالعه کامل رزومه و سوابق مربی →</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="transformations" class="section-container">
+        <h2 class="section-title">نتایج شگفت‌انگیز شاگردان</h2>
+        <div class="transformation-grid">
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=400&auto=format&fit=crop" alt="مشتری ۱">
+                <h4>رضا کریمی</h4>
+                <p>«کاهش ۱۲ کیلو چربی در ۳ ماه، فوق‌العاده‌ست!»</p>
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?q=80&w=400&auto=format&fit=crop" alt="مشتری ۲">
+                <h4>سیمین ارجمند</h4>
+                <p>«بهترین برنامه‌ای که تو عمرم گرفتم.»</p>
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1574680096145-d05b474e2155?q=80&w=400&auto=format&fit=crop" alt="مشتری ۳">
+                <h4>امیررضا صابری</h4>
+                <p>«عضله‌سازی خشک و عالی با پکیج وی.»</p>
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1517838277536-f5f99be501cd?q=80&w=400&auto=format&fit=crop" alt="مشتری ۴">
+                <h4>نیما مرادی</h4>
+                <p>«پشتیبانی و دیزاین برنامه بی‌نظیر بود.»</p>
+            </div>
+            <div class="transformation-card">
+                <img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?q=80&w=400&auto=format&fit=crop" alt="مشتری ۵">
+                <h4>هادی وفایی</h4>
+                <p>«مرسی از تیم قوی Iron Club.»</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="guarantee-section">
+        <h2 style="font-size: 2rem; font-weight:900; margin-bottom:10px;">تضمین اصالت و اعتبار مجموعه</h2>
+        <p style="color:var(--text-gray); max-width:700px; margin:0 auto;">ما به کیفیت محصولات و خدمات خود ایمان کامل داریم.</p>
+        <div class="guarantee-grid">
+            <div class="guarantee-item">
+                <h4>✓ ضمانت ۱۰۰٪ اصالت کالا</h4>
+                <p>تمامی مکمل‌ها دارای بارکد وزارت بهداشت و اصالت مستقیم هستند.</p>
+            </div>
+            <div class="guarantee-item">
+                <h4>✓ بازگشت وجه بی‌قید و شرط</h4>
+                <p>در صورت مغایرت محصول، تا ۷ روز امکان مرجوعی وجود دارد.</p>
+            </div>
+            <div class="guarantee-item">
+                <h4>✓ پشتیبانی مستقیم مربی</h4>
+                <p>ارتباط ۲۴ ساعته با تیم فنی و مربی ارشد جهت پیگیری برنامه‌ها.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="footer-links">
+        <div class="footer-col">
+            <h4>IRON CLUB</h4>
+            <p style="font-weight:700; margin-top:10px; max-width:250px;">پیشرو در ارائه خدمات لوکس بدنسازی و مکمل‌های اورجینال در ایران.</p>
+        </div>
+        <div class="footer-col">
+            <h4>محصولات و فروشگاه</h4>
+            <ul>
+                <li><a href="#supplements">لینک مکمل‌ها و داروها</a></li>
+                <li><a href="#apparel">لینک لباس‌ها و برندها</a></li>
+            </ul>
+        </div>
+        <div class="footer-col">
+            <h4>بلاگ و اطلاعات</h4>
+            <ul>
+                <li><a href="#coach">لینک بلاگ مربی و رزومه</a></li>
+                <li><a href="#transformations">لینک نتایج و نظرات مشتریان</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        function slideTrack(trackId, direction) {
+            const track = document.getElementById(trackId);
+            const cardWidth = 350; // عرض کارت به همراه فاصله
+            const currentTransform = track.style.transform ? parseInt(track.style.transform.replace('translateX(', '').replace('px)', '')) : 0;
+            
+            let newTransform = currentTransform + (direction * cardWidth);
+            
+            // محدود کردن اسلایدر به ابتدا و انتها
+            const maxScroll = -(track.scrollWidth - track.parentElement.clientWidth);
+            if (newTransform > 0) newTransform = 0;
+            if (newTransform < maxScroll) newTransform = maxScroll;
+            
+            track.style.transform = `translateX(${newTransform}px)`;
+        }
+    </script>
+</body>
+</html>
